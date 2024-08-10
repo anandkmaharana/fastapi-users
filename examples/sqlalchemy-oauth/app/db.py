@@ -9,10 +9,12 @@ from fastapi_users.db import (
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, relationship
 
-DATABASE_URL = "sqlite+aiosqlite:///../../../../database/test.db"
+DATABASE_URL = "sqlite+aiosqlite:///../../../../database/user.db"
 
 
 class Base(DeclarativeBase):
+    first_name: str
+    last_name: str
     is_evaluator: bool = False
 
 
@@ -21,6 +23,8 @@ class OAuthAccount(SQLAlchemyBaseOAuthAccountTableUUID, Base):
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
+    first_name = Column(String, nullable=False)
+    last_name = Column(String, nullable=False)
     is_evaluator = Column(Boolean, nullable=False, default=False)
     oauth_accounts: Mapped[List[OAuthAccount]] = relationship(
         "OAuthAccount", lazy="joined"

@@ -7,6 +7,8 @@ class UserProtocol(Protocol[ID]):
     """User protocol that ORM model should follow."""
 
     id: ID
+    first_name: str
+    last_name: str
     email: str
     hashed_password: str
     is_active: bool
@@ -35,6 +37,8 @@ class UserOAuthProtocol(UserProtocol[ID], Generic[ID, OAP]):
     """User protocol including a list of OAuth accounts."""
 
     id: ID
+    first_name: str
+    last_name: str
     email: str
     hashed_password: str
     is_active: bool

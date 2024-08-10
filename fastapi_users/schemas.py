@@ -48,6 +48,8 @@ class BaseUser(CreateUpdateDictModel, Generic[models.ID]):
     """Base User model."""
 
     id: models.ID
+    first_name: str
+    last_name: str
     email: EmailStr
     is_active: bool = True
     is_superuser: bool = False
@@ -63,6 +65,8 @@ class BaseUser(CreateUpdateDictModel, Generic[models.ID]):
 
 
 class BaseUserCreate(CreateUpdateDictModel):
+    first_name: str
+    last_name: str
     email: EmailStr
     password: str
     is_active: Optional[bool] = True
@@ -72,6 +76,8 @@ class BaseUserCreate(CreateUpdateDictModel):
 
 
 class BaseUserUpdate(CreateUpdateDictModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
     password: Optional[str] = None
     email: Optional[EmailStr] = None
     is_active: Optional[bool] = None
