@@ -12,6 +12,7 @@ class UserProtocol(Protocol[ID]):
     is_active: bool
     is_superuser: bool
     is_verified: bool
+    is_evaluator: bool
 
 
 class OAuthAccountProtocol(Protocol[ID]):
@@ -39,6 +40,7 @@ class UserOAuthProtocol(UserProtocol[ID], Generic[ID, OAP]):
     is_active: bool
     is_superuser: bool
     is_verified: bool
+    is_evaluator: bool
     oauth_accounts: List[OAP]
 
 

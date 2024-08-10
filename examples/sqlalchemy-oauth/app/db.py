@@ -1,5 +1,5 @@
 from typing import AsyncGenerator, List
-
+from sqlalchemy import Column, String, Boolean
 from fastapi import Depends
 from fastapi_users.db import (
     SQLAlchemyBaseOAuthAccountTableUUID,
@@ -9,11 +9,11 @@ from fastapi_users.db import (
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, relationship
 
-DATABASE_URL = "sqlite+aiosqlite:///./test.db"
+DATABASE_URL = "sqlite+aiosqlite:///../../../../database/test.db"
 
 
 class Base(DeclarativeBase):
-    pass
+    is_evaluator: bool = False
 
 
 class OAuthAccount(SQLAlchemyBaseOAuthAccountTableUUID, Base):
@@ -21,6 +21,7 @@ class OAuthAccount(SQLAlchemyBaseOAuthAccountTableUUID, Base):
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
+    is_evaluator = Column(Boolean, nullable=False, default=False)
     oauth_accounts: Mapped[List[OAuthAccount]] = relationship(
         "OAuthAccount", lazy="joined"
     )

@@ -52,6 +52,7 @@ class BaseUser(CreateUpdateDictModel, Generic[models.ID]):
     is_active: bool = True
     is_superuser: bool = False
     is_verified: bool = False
+    is_evaluator: bool = False
 
     if PYDANTIC_V2:  # pragma: no cover
         model_config = ConfigDict(from_attributes=True)  # type: ignore
@@ -67,6 +68,7 @@ class BaseUserCreate(CreateUpdateDictModel):
     is_active: Optional[bool] = True
     is_superuser: Optional[bool] = False
     is_verified: Optional[bool] = False
+    is_evaluator: bool = False
 
 
 class BaseUserUpdate(CreateUpdateDictModel):
@@ -75,6 +77,7 @@ class BaseUserUpdate(CreateUpdateDictModel):
     is_active: Optional[bool] = None
     is_superuser: Optional[bool] = None
     is_verified: Optional[bool] = None
+    is_evaluator: Optional[bool] = False
 
 
 U = TypeVar("U", bound=BaseUser)
